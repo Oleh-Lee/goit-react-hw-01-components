@@ -1,17 +1,8 @@
 import React from "react";
-import user from "./user.json";
 import styles from "./Profile.module.css";
 import PropTypes from "prop-types";
 
-const {
-  name,
-  tag,
-  location,
-  avatar,
-  stats: { followers, views, likes }
-} = user;
-
-const Profile = ({ user }) => {
+const Profile = ({ user: {name, location, tag, avatar, stats:{followers, views, likes}} }) => {
   return (
     <div className={styles.profile}>
       <div className={styles.description}>
@@ -39,15 +30,18 @@ const Profile = ({ user }) => {
   );
 };
 
-user.propTypes = {
-  name: PropTypes.string.isRequired,
-  tag: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired,
-  avatar: PropTypes.string.isRequired,
-  stats: PropTypes.shape( {
-    followers: PropTypes.number.isRequired,
-    views: PropTypes.number.isRequired,
-    likes: PropTypes.number.isRequired
-  }).isRequired
+Profile.propTypes = {
+  user: PropTypes.shape({
+    name: PropTypes.string,
+    tag: PropTypes.string,
+    location: PropTypes.string,
+    avatar: PropTypes.string,
+    stats: PropTypes.shape({
+      followers: PropTypes.number.isRequired,
+      views: PropTypes.number.isRequired,
+      likes: PropTypes.number.isRequired,
+    }),
+  })
 };
+
 export default Profile;
